@@ -32,7 +32,8 @@ public class Main {
 					prescriptionDAO, appointmentDAO);
 			Menu menu = new Menu(patientService);
 			menu.displayMenu();
-			menu.parseMe();
+			menu.parseMeXML();
+			menu.parseMeJSON();
 
 		} catch (SQLException e) {
 			e.printStackTrace();

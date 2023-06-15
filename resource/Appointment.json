@@ -1,0 +1,7 @@
+{
+  "id": 1,
+  "patientId": 123,
+  "doctorId": 456,
+  "appointmentDate": "2023-05-26",
+  "appointmentTime": "10:00 AM"
+}

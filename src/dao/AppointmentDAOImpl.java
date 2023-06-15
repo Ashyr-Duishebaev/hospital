@@ -12,13 +12,14 @@ import java.util.List;
 
 import model.Appointment;
 
-public class AppointmentDAOImpl extends AbstractDAO<Appointment> implements AppointmentDAO {
+public class AppointmentDAOImpl implements AppointmentDAO {
+
+	private Connection connection;
 
 	public AppointmentDAOImpl(Connection connection) {
-		super(connection);
+		this.connection = connection;
 	}
 
-	@Override
 	protected Appointment mapResultSetToEntity(ResultSet resultSet) throws SQLException {
 		int appointmentId = resultSet.getInt("appointment_id");
 		int patientId = resultSet.getInt("patient_id");

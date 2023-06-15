@@ -1,1 +1,1 @@
-{"last_found_secrets": [{"name": "MySQL Credentials - resource/db.properties", "match": "3e8ac7511f500d74821396e32c67de5b0555338dffa34974c11543beb9ebe276"}]}
+{"last_found_secrets": [{"match": "3e8ac7511f500d74821396e32c67de5b0555338dffa34974c11543beb9ebe276", "name": "MySQL Credentials - resource/db.properties"}]}

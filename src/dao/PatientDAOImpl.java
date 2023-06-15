@@ -10,13 +10,14 @@ import java.util.List;
 
 import model.Patient;
 
-public class PatientDAOImpl extends AbstractDAO<Patient> implements PatientDAO {
+public class PatientDAOImpl implements PatientDAO {
+
+	private Connection connection;
 
 	public PatientDAOImpl(Connection connection) {
-		super(connection);
+		this.connection = connection;
 	}
 
-	@Override
 	protected Patient mapResultSetToEntity(ResultSet resultSet) throws SQLException {
 		int id = resultSet.getInt("patient_id");
 		String firstName = resultSet.getString("first_name");
@@ -102,5 +103,11 @@ public class PatientDAOImpl extends AbstractDAO<Patient> implements PatientDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void save(Patient patient) {
+		// TODO Auto-generated method stub
+
 	}
 }

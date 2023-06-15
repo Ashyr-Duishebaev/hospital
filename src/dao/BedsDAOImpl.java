@@ -10,13 +10,14 @@ import java.util.List;
 
 import model.Beds;
 
-public class BedsDAOImpl extends AbstractDAO<Beds> implements BedsDAO {
+public class BedsDAOImpl implements BedsDAO {
+
+	private Connection connection;
 
 	public BedsDAOImpl(Connection connection) {
-		super(connection);
+		this.connection = connection;
 	}
 
-	@Override
 	protected Beds mapResultSetToEntity(ResultSet resultSet) throws SQLException {
 		int bedId = resultSet.getInt("bed_id");
 		String bedType = resultSet.getString("bed_type");

@@ -1,6 +1,10 @@
 package model;
 
 import java.io.File;
+import java.io.IOException;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
@@ -8,27 +12,38 @@ import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
 import jakarta.xml.bind.ValidationEvent;
 import jakarta.xml.bind.ValidationEventHandler;
-import jakarta.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
 public class Patient {
 
-	private int patient_id;
+	@JsonProperty("patientId")
+	private int patientId;
+
+	@JsonProperty("firstName")
 	private String firstName;
+
+	@JsonProperty("lastName")
 	private String lastName;
-	private String date_of_birth;
+
+	@JsonProperty("dateOfBirth")
+	private String dateOfBirth;
+
+	@JsonProperty("gender")
 	private String gender;
-	private String contact_number;
+
+	@JsonProperty("contactNumber")
+	private String contactNumber;
+
+	@JsonProperty("address")
 	private String address;
 
-	public Patient(int patient_id, String firstName, String lastName, String date_of_birth, String gender,
+	public Patient(int patientId, String firstName, String lastName, String dateOfBirth, String gender,
 			String contact_number,
 			String address) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.date_of_birth = date_of_birth;
+		this.dateOfBirth = dateOfBirth;
 		this.gender = gender;
-		this.contact_number = contact_number;
+		this.contactNumber = contactNumber;
 		this.address = address;
 	}
 
@@ -36,11 +51,11 @@ public class Patient {
 	}
 
 	public int getId() {
-		return patient_id;
+		return patientId;
 	}
 
-	public void setId(int patient_id) {
-		this.patient_id = patient_id;
+	public void setId(int patientId) {
+		this.patientId = patientId;
 	}
 
 	public String getFirstName() {
@@ -60,11 +75,11 @@ public class Patient {
 	}
 
 	public String getDateOfBirth() {
-		return date_of_birth;
+		return dateOfBirth;
 	}
 
 	public void setDateOfBirth(String dateOfBirth) {
-		this.date_of_birth = dateOfBirth;
+		this.dateOfBirth = dateOfBirth;
 	}
 
 	public String getGender() {
@@ -76,11 +91,11 @@ public class Patient {
 	}
 
 	public String getContactNumber() {
-		return contact_number;
+		return contactNumber;
 	}
 
 	public void setContactNumber(String contactNumber) {
-		this.contact_number = contact_number;
+		this.contactNumber = contactNumber;
 	}
 
 	public String getAddress() {
@@ -93,8 +108,8 @@ public class Patient {
 
 	@Override
 	public String toString() {
-		return "Patient [id=" + patient_id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth="
-				+ date_of_birth + ", gender=" + gender + ", contactNumber=" + contact_number + ", address=" + address
+		return "Patient [id=" + patientId + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth="
+				+ dateOfBirth + ", gender=" + gender + ", contactNumber=" + contactNumber + ", address=" + address
 				+ "]";
 	}
 
@@ -164,6 +179,28 @@ public class Patient {
 	public Treatment getPrescribedTreatment() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public void saveToJson() {
+		try {
+			ObjectMapper objectMapper = new ObjectMapper();
+			File file = new File("Patient.json");
+			objectMapper.writeValue(file, this);
+			System.out.println("Patient saved to JSON file successfully.");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static Patient fromJsonFile(String filename) {
+		try {
+			ObjectMapper objectMapper = new ObjectMapper();
+			File file = new File(filename);
+			return objectMapper.readValue(file, Patient.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
 
