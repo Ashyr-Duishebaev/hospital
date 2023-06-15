@@ -1,6 +1,10 @@
 package model;
 
 import java.io.File;
+import java.io.IOException;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
@@ -8,15 +12,24 @@ import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
 import jakarta.xml.bind.ValidationEvent;
 import jakarta.xml.bind.ValidationEventHandler;
-import jakarta.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
 public class Doctor {
+	@JsonProperty("id")
 	private int id;
+
+	@JsonProperty("firstName")
 	private String firstName;
+
+	@JsonProperty("lastName")
 	private String lastName;
+
+	@JsonProperty("specialization")
 	private String specialization;
+
+	@JsonProperty("contactNumber")
 	private String contactNumber;
+
+	@JsonProperty("address")
 	private String address;
 
 	public Doctor(int id, String firstName, String lastName) {
@@ -131,6 +144,27 @@ public class Doctor {
 
 			System.out.println("Parsed XML: " + doctor);
 		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void saveToJson() {
+		try {
+			ObjectMapper objectMapper = new ObjectMapper();
+			File file = new File("/Doctor.json");
+			objectMapper.writeValue(file, this);
+			System.out.println("Doctor saved to JSON file successfully.");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void parseJson() {
+		try {
+			ObjectMapper objectMapper = new ObjectMapper();
+			Doctor doctor = objectMapper.readValue(new File("/Doctor.json"), Doctor.class);
+			System.out.println("Parsed JSON: " + doctor);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

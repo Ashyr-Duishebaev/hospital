@@ -172,19 +172,16 @@ public class Patient {
 	}
 
 	public void setPrescribedTreatment(Treatment treatment) {
-		// TODO Auto-generated method stub
-
 	}
 
 	public Treatment getPrescribedTreatment() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public void saveToJson() {
 		try {
 			ObjectMapper objectMapper = new ObjectMapper();
-			File file = new File("Patient.json");
+			File file = new File("resource/Patient.json");
 			objectMapper.writeValue(file, this);
 			System.out.println("Patient saved to JSON file successfully.");
 		} catch (IOException e) {

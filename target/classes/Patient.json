@@ -1,9 +1,9 @@
 {
-  "patient_id": 1,
+  "patientId": 1,
   "firstName": "John",
   "lastName": "Doe",
-  "date_of_birth": "1990-01-01",
+  "dateOfBirth": "1990-01-01",
   "gender": "Male",
-  "contact_number": "1234567890",
+  "contactNumber": "1234567890",
   "address": "123 Main Street"
 }
