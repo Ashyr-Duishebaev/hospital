@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<patient>
+    <address>999 Wall Street</address>
+    <contactNumber>99999999</contactNumber>
+    <dateOfBirth>1989-12-05</dateOfBirth>
+    <firstName>Peter</firstName>
+    <gender>Male</gender>
+    <id>0</id>
+    <lastName>Parket</lastName>
+</patient>

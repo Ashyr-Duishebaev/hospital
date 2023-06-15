@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="doctor.xsd">
+    <id>1</id>
+    <firstName>Peter</firstName>
+    <lastName>Parker</lastName>
+    <specialization>Cardiology</specialization>
+    <contactNumber>99999999</contactNumber>
+    <address>101 Wall St</address>
+</doctor>

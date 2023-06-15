@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<appointment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="appointment.xsd">
+    <id>1</id>
+    <patientId>9999</patientId>
+    <doctorId>2</doctorId>
+    <appointmentDate>2023-05-25</appointmentDate>
+    <appointmentTime>10:00 AM</appointmentTime>
+</appointment>

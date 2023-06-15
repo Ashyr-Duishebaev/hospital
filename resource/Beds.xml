@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="beds.xsd">
+    <bedId>1</bedId>
+    <bedType>Single</bedType>
+    <isOccupied>false</isOccupied>
+</beds>

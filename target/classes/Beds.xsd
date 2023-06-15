@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:element name="beds">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="bedId" type="xsd:int"/>
+                <xsd:element name="bedType" type="xsd:string"/>
+                <xsd:element name="isOccupied" type="xsd:boolean"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+</xsd:schema>
