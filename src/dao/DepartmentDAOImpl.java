@@ -9,13 +9,14 @@ import java.util.List;
 
 import model.Department;
 
-public class DepartmentDAOImpl extends AbstractDAO<Department> implements DepartmentDAO {
+public class DepartmentDAOImpl implements DepartmentDAO {
+
+	private Connection connection;
 
 	public DepartmentDAOImpl(Connection connection) {
-		super(connection);
+		this.connection = connection;
 	}
 
-	@Override
 	protected Department mapResultSetToEntity(ResultSet resultSet) throws SQLException {
 		int departmentId = resultSet.getInt("department_id");
 		String departmentName = resultSet.getString("department_name");
@@ -84,6 +85,36 @@ public class DepartmentDAOImpl extends AbstractDAO<Department> implements Depart
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public Department findById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Department> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void save(Department department) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void update(Department department) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void delete(Department department) {
+		// TODO Auto-generated method stub
+
 	}
 }
 

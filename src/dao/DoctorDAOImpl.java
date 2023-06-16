@@ -9,13 +9,14 @@ import java.util.List;
 
 import model.Doctor;
 
-public class DoctorDAOImpl extends AbstractDAO<Doctor> implements DoctorDAO {
+public class DoctorDAOImpl implements DoctorDAO {
+
+	private Connection connection;
 
 	public DoctorDAOImpl(Connection connection) {
-		super(connection);
+		this.connection = connection;
 	}
 
-	@Override
 	protected Doctor mapResultSetToEntity(ResultSet resultSet) throws SQLException {
 		int doctorId = resultSet.getInt("doctor_id");
 		String name = resultSet.getString("name");

@@ -4,20 +4,29 @@ import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
 import jakarta.xml.bind.ValidationEvent;
 import jakarta.xml.bind.ValidationEventHandler;
-import jakarta.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
 public class Appointment {
+	@JsonProperty("id")
 	private int id;
+
+	@JsonProperty("patient_id")
 	private int patientId;
+
+	@JsonProperty("doctor_id")
 	private int doctorId;
+
+	@JsonProperty("appointment_date")
 	private String appointmentDate;
+
+	@JsonProperty("appointment_time")
 	private String appointmentTime;
 
 	public Appointment(int id, int patientId, int doctorId, LocalDate date, LocalTime time) {
@@ -84,7 +93,7 @@ public class Appointment {
 			Marshaller marshaller = context.createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-			File file = new File("/Appointment.xml");
+			File file = new File("resource/Appointment.xml");
 			marshaller.marshal(this, file);
 			System.out.println("Appointment saved to XML file successfully.");
 		} catch (JAXBException e) {
@@ -106,7 +115,7 @@ public class Appointment {
 			};
 			unmarshaller.setEventHandler(eventHandler);
 
-			unmarshaller.unmarshal(new File("/Appointment.xml"));
+			unmarshaller.unmarshal(new File("resource/Appointment.xml"));
 			System.out.println("XML validation successful.");
 			return true;
 		} catch (JAXBException e) {
@@ -120,7 +129,7 @@ public class Appointment {
 			JAXBContext context = JAXBContext.newInstance(Appointment.class);
 			Unmarshaller unmarshaller = context.createUnmarshaller();
 
-			Appointment appointment = (Appointment) unmarshaller.unmarshal(new File("/Appointment.xml"));
+			Appointment appointment = (Appointment) unmarshaller.unmarshal(new File("resource/Appointment.xml"));
 
 			System.out.println("Parsed XML: " + appointment);
 		} catch (JAXBException e) {

@@ -107,7 +107,7 @@ public class Menu {
 		System.out.println("Appointment made successfully.");
 	}
 
-	public void parseMe() throws SQLException {
+	public void parseMeXML() throws SQLException {
 		Patient patient1 = new Patient(1, "Peter", "Parker", "1989-12-05", "Male", "99999999", "999 Wall Street");
 		patient1.saveToXml();
 		boolean isValid = patient1.validateXml();
@@ -116,5 +116,10 @@ public class Menu {
 		} else {
 			System.out.println("XML validation failed. Unable to parse the XML file.");
 		}
+	}
+
+	public void parseMeJSON() throws SQLException {
+		Patient loadedPatient = Patient.fromJsonFile("resource/Patient.json");
+		System.out.println("Loaded Patient: " + loadedPatient);
 	}
 }
