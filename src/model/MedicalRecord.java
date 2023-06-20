@@ -1,6 +1,9 @@
 package model;
 
+import java.util.logging.Logger;
+
 public class MedicalRecord {
+	private static final Logger logger = Logger.getLogger(MedicalRecord.class.getName());
 	private String recordId;
 	private String patientId;
 	private String doctorId;

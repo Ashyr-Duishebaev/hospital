@@ -21,4 +21,3 @@ public class TreatmentServiceImpl implements TreatmentService {
 		return patient.getPrescribedTreatment();
 	}
 }
-

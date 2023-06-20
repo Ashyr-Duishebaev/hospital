@@ -1,6 +1,9 @@
 package model;
 
+import java.util.logging.Logger;
+
 public class LabTest {
+	private static final Logger logger = Logger.getLogger(LabTest.class.getName());
 	private String testId;
 	private String testName;
 	private String testDescription;

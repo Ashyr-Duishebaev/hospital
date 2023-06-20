@@ -1,120 +1,73 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
 
 import model.Department;
 
 public class DepartmentDAOImpl implements DepartmentDAO {
+	private final SqlSession sqlSession;
+	private final DepartmentDAO departmentDAO;
 
-	private Connection connection;
-
-	public DepartmentDAOImpl(Connection connection) {
-		this.connection = connection;
-	}
-
-	protected Department mapResultSetToEntity(ResultSet resultSet) throws SQLException {
-		int departmentId = resultSet.getInt("department_id");
-		String departmentName = resultSet.getString("department_name");
-
-		return new Department(departmentId, departmentName);
+	public DepartmentDAOImpl(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
+		this.departmentDAO = sqlSession.getMapper(DepartmentDAO.class);
 	}
 
 	@Override
 	public void createDepartment(Department department) {
-		try (PreparedStatement statement = connection
-				.prepareStatement("INSERT INTO departments (department_name) VALUES (?)")) {
-			statement.setString(1, department.getDepartmentName());
-			statement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		departmentDAO.createDepartment(department);
+		sqlSession.commit();
 	}
 
 	@Override
 	public Department getDepartmentById(int id) {
-		try (PreparedStatement statement = connection
-				.prepareStatement("SELECT * FROM departments WHERE department_id = ?")) {
-			statement.setInt(1, id);
-			ResultSet resultSet = statement.executeQuery();
-			if (resultSet.next()) {
-				return mapResultSetToEntity(resultSet);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
+		return departmentDAO.getDepartmentById(id);
 	}
 
 	@Override
 	public List<Department> getAllDepartments() {
-		List<Department> departments = new ArrayList<>();
-		try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM departments")) {
-			ResultSet resultSet = statement.executeQuery();
-			while (resultSet.next()) {
-				departments.add(mapResultSetToEntity(resultSet));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return departments;
+		return departmentDAO.getAllDepartments();
 	}
 
 	@Override
 	public void updateDepartment(Department department) {
-		try (PreparedStatement statement = connection
-				.prepareStatement("UPDATE departments SET department_name = ? WHERE department_id = ?")) {
-			statement.setString(1, department.getDepartmentName());
-			statement.setInt(2, department.getDepartmentId());
-			statement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		departmentDAO.updateDepartment(department);
+		sqlSession.commit();
 	}
 
 	@Override
 	public void deleteDepartment(Department department) {
-		try (PreparedStatement statement = connection
-				.prepareStatement("DELETE FROM departments WHERE department_id = ?")) {
-			statement.setInt(1, department.getDepartmentId());
-			statement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		departmentDAO.deleteDepartment(department);
+		sqlSession.commit();
 	}
 
 	@Override
 	public Department findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return departmentDAO.findById(id);
 	}
 
 	@Override
 	public List<Department> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return departmentDAO.findAll();
 	}
 
 	@Override
 	public void save(Department department) {
-		// TODO Auto-generated method stub
-
+		departmentDAO.save(department);
+		sqlSession.commit();
 	}
 
 	@Override
 	public void update(Department department) {
-		// TODO Auto-generated method stub
-
+		departmentDAO.update(department);
+		sqlSession.commit();
 	}
 
 	@Override
 	public void delete(Department department) {
-		// TODO Auto-generated method stub
-
+		departmentDAO.delete(department);
+		sqlSession.commit();
 	}
 }
-

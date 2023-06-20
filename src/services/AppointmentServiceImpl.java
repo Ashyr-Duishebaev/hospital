@@ -7,7 +7,7 @@ import model.Appointment;
 
 public class AppointmentServiceImpl implements AppointmentService {
 
-	private AppointmentDAO appointmentDAO;
+	private final AppointmentDAO appointmentDAO;
 
 	public AppointmentServiceImpl(AppointmentDAO appointmentDAO) {
 		this.appointmentDAO = appointmentDAO;
@@ -38,4 +38,3 @@ public class AppointmentServiceImpl implements AppointmentService {
 		appointmentDAO.deleteAppointment(appointment);
 	}
 }
-

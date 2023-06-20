@@ -1,12 +1,11 @@
 package model;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Treatment {
+	private static final Logger logger = Logger.getLogger(Treatment.class.getName());
 	@JsonProperty("id")
 	private int id;
 
@@ -51,25 +50,5 @@ public class Treatment {
 		return "Treatment [id=" + id + ", name=" + name + ", description=" + description + "]";
 	}
 
-	public void saveToJson() {
-		try {
-			ObjectMapper objectMapper = new ObjectMapper();
-			File file = new File("/Treatment.json");
-			objectMapper.writeValue(file, this);
-			System.out.println("Treatment saved to JSON file successfully.");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void parseJson() {
-		try {
-			ObjectMapper objectMapper = new ObjectMapper();
-			Treatment treatment = objectMapper.readValue(new File("/Treatment.json"), Treatment.class);
-			System.out.println("Parsed JSON: " + treatment);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 }
 

@@ -13,12 +13,12 @@ public class DiagnosisServiceImpl implements DiagnosisService {
 
 	@Override
 	public void assignDiagnosis(Patient patient, Diagnosis diagnosis) {
+		diagnosisDAO.save(diagnosis);
 		patient.setDiagnosis(diagnosis);
 	}
 
 	@Override
 	public Diagnosis getPatientDiagnosis(Patient patient) {
-		return patient.getDiagnosis();
+		return diagnosisDAO.getDiagnosisById(patient.getId());
 	}
 }
-
