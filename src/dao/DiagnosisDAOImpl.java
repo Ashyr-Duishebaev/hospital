@@ -1,33 +1,40 @@
 package dao;
 
 import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
 
 import model.Diagnosis;
 
 public class DiagnosisDAOImpl implements DiagnosisDAO {
-	private Map<Integer, Diagnosis> diagnosisMap;
+	private final SqlSession sqlSession;
+
+	private Connection connection;
 
 	public DiagnosisDAOImpl(Connection connection) {
-		this.diagnosisMap = new HashMap<>();
+		this.connection = connection;
+		this.sqlSession = null;
+	}
+	public DiagnosisDAOImpl(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
 	}
 
 	@Override
 	public void save(Diagnosis diagnosis) {
-		diagnosisMap.put(diagnosis.getId(), diagnosis);
+		DiagnosisDAO diagnosisDAO = sqlSession.getMapper(DiagnosisDAO.class);
+		diagnosisDAO.save(diagnosis);
 	}
 
 	@Override
 	public Diagnosis getDiagnosisById(int id) {
-		return diagnosisMap.get(id);
+		DiagnosisDAO diagnosisDAO = sqlSession.getMapper(DiagnosisDAO.class);
+		return diagnosisDAO.getDiagnosisById(id);
 	}
 
 	@Override
 	public List<Diagnosis> getAllDiagnoses() {
-		return new ArrayList<>(diagnosisMap.values());
+		DiagnosisDAO diagnosisDAO = sqlSession.getMapper(DiagnosisDAO.class);
+		return diagnosisDAO.getAllDiagnoses();
 	}
 }
-

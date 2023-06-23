@@ -1,19 +1,11 @@
 package model;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.JAXBException;
-import jakarta.xml.bind.Marshaller;
-import jakarta.xml.bind.Unmarshaller;
-import jakarta.xml.bind.ValidationEvent;
-import jakarta.xml.bind.ValidationEventHandler;
 
 public class Patient {
+	private static final Logger logger = Logger.getLogger(Patient.class.getName());
 
 	@JsonProperty("patientId")
 	private int patientId;
@@ -113,55 +105,6 @@ public class Patient {
 				+ "]";
 	}
 
-	public void saveToXml() {
-		try {
-			JAXBContext context = JAXBContext.newInstance(Patient.class);
-			Marshaller marshaller = context.createMarshaller();
-			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-			File file = new File("resource/Patient.xml");
-			marshaller.marshal(this, file);
-			System.out.println("Patient saved to XML file successfully.");
-		} catch (JAXBException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public boolean validateXml() {
-		try {
-			JAXBContext context = JAXBContext.newInstance(Patient.class);
-			Unmarshaller unmarshaller = context.createUnmarshaller();
-
-			ValidationEventHandler eventHandler = new ValidationEventHandler() {
-				@Override
-				public boolean handleEvent(ValidationEvent event) {
-					System.out.println("Validation Error: " + event.getMessage());
-					return false;
-				}
-			};
-			unmarshaller.setEventHandler(eventHandler);
-
-			unmarshaller.unmarshal(new File("resource/Patient.xml"));
-			System.out.println("XML validation successful.");
-			return true;
-		} catch (JAXBException e) {
-			System.out.println("XML validation failed. Error: " + e.getMessage());
-			return false;
-		}
-	}
-
-	public void parseXml() {
-		try {
-			JAXBContext context = JAXBContext.newInstance(Patient.class);
-			Unmarshaller unmarshaller = context.createUnmarshaller();
-
-			Patient patient = (Patient) unmarshaller.unmarshal(new File("resource/Patient.xml"));
-
-			System.out.println("Parsed XML: " + patient);
-		} catch (JAXBException e) {
-			e.printStackTrace();
-		}
-	}
 
 	public void setDiagnosis(Diagnosis diagnosis) {
 
@@ -178,29 +121,10 @@ public class Patient {
 		return null;
 	}
 
-	public void saveToJson() {
-		try {
-			ObjectMapper objectMapper = new ObjectMapper();
-			File file = new File("resource/Patient.json");
-			objectMapper.writeValue(file, this);
-			System.out.println("Patient saved to JSON file successfully.");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void setAge(int age) {
 	}
 
-	public static Patient fromJsonFile(String filename) {
-		try {
-			ObjectMapper objectMapper = new ObjectMapper();
-			File file = new File(filename);
-			return objectMapper.readValue(file, Patient.class);
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
+	public void setMedicalHistory(String newMedicalHistory) {
 	}
+
 }
-
-//int patientId = 1; // Replace with the desired patient ID
-//Patient patient = patientDAO.getPatientById(patientId);
-//System.out.println("Retrieved Patient: " + patient);

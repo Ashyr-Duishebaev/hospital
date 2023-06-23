@@ -1,6 +1,9 @@
 package model;
 
+import java.util.logging.Logger;
+
 public class Ward {
+	private static final Logger logger = Logger.getLogger(Ward.class.getName());
 	private String wardId;
 	private String wardName;
 	private String departmentId;

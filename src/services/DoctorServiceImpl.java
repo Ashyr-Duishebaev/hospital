@@ -6,8 +6,7 @@ import dao.DoctorDAO;
 import model.Doctor;
 
 public class DoctorServiceImpl implements DoctorService {
-
-	private DoctorDAO doctorDAO;
+	private final DoctorDAO doctorDAO;
 
 	public DoctorServiceImpl(DoctorDAO doctorDAO) {
 		this.doctorDAO = doctorDAO;

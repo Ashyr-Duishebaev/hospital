@@ -1,19 +1,14 @@
 package model;
 
-import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jakarta.xml.bind.JAXBContext;
-import jakarta.xml.bind.JAXBException;
-import jakarta.xml.bind.Marshaller;
-import jakarta.xml.bind.Unmarshaller;
-import jakarta.xml.bind.ValidationEvent;
-import jakarta.xml.bind.ValidationEventHandler;
-
 public class Appointment {
+	private static final Logger logger = Logger.getLogger(Appointment.class.getName());
+
 	@JsonProperty("id")
 	private int id;
 
@@ -87,53 +82,5 @@ public class Appointment {
 				+ appointmentDate + ", appointmentTime=" + appointmentTime + "]";
 	}
 
-	public void saveToXml() {
-		try {
-			JAXBContext context = JAXBContext.newInstance(Appointment.class);
-			Marshaller marshaller = context.createMarshaller();
-			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-			File file = new File("resource/Appointment.xml");
-			marshaller.marshal(this, file);
-			System.out.println("Appointment saved to XML file successfully.");
-		} catch (JAXBException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public boolean validateXml() {
-		try {
-			JAXBContext context = JAXBContext.newInstance(Appointment.class);
-			Unmarshaller unmarshaller = context.createUnmarshaller();
-
-			ValidationEventHandler eventHandler = new ValidationEventHandler() {
-				@Override
-				public boolean handleEvent(ValidationEvent event) {
-					System.out.println("Validation Error: " + event.getMessage());
-					return false;
-				}
-			};
-			unmarshaller.setEventHandler(eventHandler);
-
-			unmarshaller.unmarshal(new File("resource/Appointment.xml"));
-			System.out.println("XML validation successful.");
-			return true;
-		} catch (JAXBException e) {
-			System.out.println("XML validation failed. Error: " + e.getMessage());
-			return false;
-		}
-	}
-
-	public void parseXml() {
-		try {
-			JAXBContext context = JAXBContext.newInstance(Appointment.class);
-			Unmarshaller unmarshaller = context.createUnmarshaller();
-
-			Appointment appointment = (Appointment) unmarshaller.unmarshal(new File("resource/Appointment.xml"));
-
-			System.out.println("Parsed XML: " + appointment);
-		} catch (JAXBException e) {
-			e.printStackTrace();
-		}
-	}
 }

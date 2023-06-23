@@ -1,6 +1,9 @@
 package model;
 
+import java.util.logging.Logger;
+
 public class Medicine {
+	private static final Logger logger = Logger.getLogger(Medicine.class.getName());
 	private String medicineId;
 	private String medicineName;
 	private String manufacturer;

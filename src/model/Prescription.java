@@ -1,8 +1,10 @@
 package model;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 public class Prescription {
+	private static final Logger logger = Logger.getLogger(Prescription.class.getName());
 	private int prescriptionId;
 	private int patientId;
 	private String doctorId;

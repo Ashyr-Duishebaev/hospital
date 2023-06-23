@@ -23,7 +23,6 @@ public class PatientServiceImpl implements PatientService {
 
 	public PatientServiceImpl(PatientDAO patientDAO2, DiagnosisDAO diagnosisDAO, TreatmentDAO treatmentDAO,
 			PrescriptionDAO prescriptionDAO, AppointmentDAO appointmentDAO) {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

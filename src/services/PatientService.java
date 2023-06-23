@@ -31,4 +31,6 @@ public interface PatientService {
 	void prescribeTreatment(Patient patient, Treatment treatment);
 
 	void writePrescription(Patient patient, Prescription prescription);
+
+	void updatePatientInformation(int patientId, String newName, String newContactDetails, String newMedicalHistory);
 }

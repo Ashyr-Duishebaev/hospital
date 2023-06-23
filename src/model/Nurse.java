@@ -1,6 +1,9 @@
 package model;
 
+import java.util.logging.Logger;
+
 public class Nurse {
+	private static final Logger logger = Logger.getLogger(Nurse.class.getName());
 	private String nurseId;
 	private String firstName;
 	private String lastName;
