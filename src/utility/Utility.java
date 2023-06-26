@@ -146,13 +146,11 @@ public class Utility {
 					break;
 				case XMLStreamConstants.END_ELEMENT:
 					if (reader.getLocalName().equals("patient")) {
-						// Return the patient object once the end of the patient element is reached
 						return patient;
 					}
 					if (patient == null) {
 						patient = new Patient();
 					} else {
-						// Map the XML data to the Patient object attributes
 						if (currentElement.equals("firstName")) {
 							patient.setFirstName(currentText);
 						} else if (currentElement.equals("lastName")) {
@@ -161,7 +159,6 @@ public class Utility {
 							int age = Integer.parseInt(currentText);
 							patient.setAge(age);
 						}
-						// Add more mappings for other attributes as needed
 					}
 					break;
 				}
@@ -218,7 +215,6 @@ public class Utility {
 			if (patient == null) {
 				patient = new Patient();
 			} else {
-				// Map the XML data to the Patient object attributes
 				if (currentElement.equals("firstName")) {
 					patient.setFirstName(currentText.toString());
 				} else if (currentElement.equals("lastName")) {

@@ -86,4 +86,10 @@ public class PatientDAOImpl implements PatientDAO {
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public void setSqlSession(SqlSession sqlSession) {
+		// TODO Auto-generated method stub
+
+	}
 }
