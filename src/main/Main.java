@@ -1,7 +1,13 @@
 package main;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import connection.DatabaseConnection;
 import dao.AppointmentDAO;
@@ -14,8 +20,8 @@ import dao.PrescriptionDAO;
 import dao.PrescriptionDAOImpl;
 import dao.TreatmentDAO;
 import dao.TreatmentDAOImpl;
-import services.PatientService;
-import services.PatientServiceImpl;
+import services.PatientServiceMapper;
+import services.PatientServiceMapperImpl;
 
 public class Main {
 
@@ -28,12 +34,16 @@ public class Main {
 			PrescriptionDAO prescriptionDAO = new PrescriptionDAOImpl(connection);
 			AppointmentDAO appointmentDAO = new AppointmentDAOImpl(connection);
 
-			PatientService patientService = new PatientServiceImpl(patientDAO, diagnosisDAO, treatmentDAO,
-					prescriptionDAO, appointmentDAO);
+			PatientServiceMapper patientService = new PatientServiceMapperImpl(patientDAO);
+
+			String mybatisConfigFile = "mybatis-config.xml";
+			InputStream inputStream = Resources.getResourceAsStream(mybatisConfigFile);
+			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
 			Menu menu = new Menu(patientService);
 			menu.displayMenu();
 
-		} catch (SQLException e) {
+		} catch (SQLException | IOException e) {
 			e.printStackTrace();
 		}
 	}

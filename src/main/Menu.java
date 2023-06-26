@@ -3,17 +3,27 @@ package main;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import services.PatientService;
+import abstractFactory.DiagnosisFactory;
+import abstractFactory.SimpleDiagnosisFactory;
+import abstractFactory.SimpleTreatmentFactory;
+import abstractFactory.TreatmentFactory;
+import model.Diagnosis;
+import model.Treatment;
+import services.PatientServiceMapper;
 
 public class Menu {
 
-	private final PatientService patientService;
+	private final PatientServiceMapper patientService;
 	private final Logger logger = Logger.getLogger(Menu.class.getName());
 	private final Scanner scanner;
+	private final DiagnosisFactory diagnosisFactory;
+	private final TreatmentFactory treatmentFactory;
 
-	public Menu(PatientService patientService) {
+	public Menu(PatientServiceMapper patientService) {
 		this.patientService = patientService;
 		this.scanner = new Scanner(System.in);
+		this.diagnosisFactory = new SimpleDiagnosisFactory();
+		this.treatmentFactory = new SimpleTreatmentFactory();
 	}
 
 	public void displayMenu() {
@@ -65,22 +75,28 @@ public class Menu {
 		logger.info("Enter diagnosis: ");
 		String diagnosis = scanner.nextLine();
 
-		patientService.assignDiagnosis(patientId, diagnosis);
+		DiagnosisFactory diagnosisFactory = new SimpleDiagnosisFactory();
+		Diagnosis assignedDiagnosis = diagnosisFactory.createDiagnosis();
+		patientService.assignDiagnosis(patientId, assignedDiagnosis);
 		logger.info("Diagnosis assigned successfully.");
 	}
 
 	private void prescribeTreatment() {
-		logger.info("Enter patient ID: ");
-		int patientId = scanner.nextInt();
-		scanner.nextLine();
+	    logger.info("Enter patient ID: ");
+	    int patientId = scanner.nextInt();
+	    scanner.nextLine();
 
-		logger.info("Enter treatment ID: ");
-		int treatmentId = scanner.nextInt();
-		scanner.nextLine();
+	    logger.info("Enter treatment ID: ");
+	    int treatmentId = scanner.nextInt();
+	    scanner.nextLine();
 
-		patientService.prescribeTreatment(patientId, treatmentId);
-		logger.info("Treatment prescribed successfully.");
+		TreatmentFactory treatmentFactory = new SimpleTreatmentFactory();
+
+		Treatment prescribedTreatment = treatmentFactory.createTreatment();
+		patientService.prescribeTreatment(patientId, prescribedTreatment);
+	    logger.info("Treatment prescribed successfully.");
 	}
+
 
 	private void writePrescription() {
 		logger.info("Enter patient ID: ");

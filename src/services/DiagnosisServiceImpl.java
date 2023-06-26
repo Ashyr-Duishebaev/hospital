@@ -14,7 +14,6 @@ public class DiagnosisServiceImpl implements DiagnosisService {
 	@Override
 	public void assignDiagnosis(Patient patient, Diagnosis diagnosis) {
 		diagnosisDAO.save(diagnosis);
-		patient.setDiagnosis(diagnosis);
 	}
 
 	@Override

@@ -15,7 +15,7 @@ public class Diagnosis {
 	@JsonProperty("description")
 	private String description;
 
-	public Diagnosis(int id, String name, String description) {
+	public Diagnosis() {
 		this.id = id;
 		this.name = name;
 		this.description = description;

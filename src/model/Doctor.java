@@ -4,8 +4,12 @@ import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import abstractFactory.DiagnosisFactory;
+import abstractFactory.TreatmentFactory;
+
 public class Doctor {
 	private static final Logger logger = Logger.getLogger(Doctor.class.getName());
+
 	@JsonProperty("id")
 	private int id;
 
@@ -24,17 +28,6 @@ public class Doctor {
 	@JsonProperty("address")
 	private String address;
 
-	public Doctor(int id, String firstName, String lastName) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.specialization = specialization;
-		this.contactNumber = contactNumber;
-		this.address = address;
-	}
-
-	public Doctor() {
-
-	}
 
 	public int getId() {
 		return id;
@@ -90,5 +83,22 @@ public class Doctor {
 				+ specialization + ", contactNumber=" + contactNumber + ", address=" + address + "]";
 	}
 
+	public void setDiagnosisFactory(DiagnosisFactory factory) {
+		// Set the diagnosis factory for the doctor
+	}
+
+	public void setTreatmentFactory(TreatmentFactory factory) {
+		// Set the treatment factory for the doctor
+	}
+
+	public Diagnosis createDiagnosis() {
+		// Use the diagnosis factory to create a diagnosis
+		return null;
+	}
+
+	public Treatment createTreatment() {
+		// Use the treatment factory to create a treatment
+		return null;
+	}
 
 }

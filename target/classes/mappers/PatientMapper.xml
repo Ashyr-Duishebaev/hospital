@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.PatientMapper">
+    <insert id="createPatient" parameterType="model.Patient">
+        <!-- SQL INSERT statement -->
+        INSERT INTO patients (patient_id, name, contact_details, medical_history)
+        VALUES (#{id}, #{name}, #{contactDetails}, #{medicalHistory})
+    </insert>
+
+    <select id="getPatientById" resultType="model.Patient" parameterType="int">
+        <!-- SQL SELECT statement -->
+        SELECT * FROM patients WHERE patient_id = #{id}
+    </select>
+
+    <select id="getAllPatients" resultType="model.Patient">
+        <!-- SQL SELECT statement -->
+        SELECT * FROM patients
+    </select>
+
+    <update id="updatePatient" parameterType="model.Patient">
+        <!-- SQL UPDATE statement -->
+        UPDATE patients SET name = #{name}, contact_details = #{contactDetails}, medical_history = #{medicalHistory}
+        WHERE patient_id = #{id}
+    </update>
+
+    <delete id="deletePatient" parameterType="int">
+        <!-- SQL DELETE statement -->
+        DELETE FROM patients WHERE patient_id = #{id}
+    </delete>
+
+    <insert id="savePatient" parameterType="model.Patient">
+        <!-- SQL INSERT statement -->
+        INSERT INTO patients (name, contact_details, medical_history)
+        VALUES (#{name}, #{contactDetails}, #{medicalHistory})
+    </insert>
+
+    <!-- Define more SQL statements and mappings as per your requirements -->
+</mapper>

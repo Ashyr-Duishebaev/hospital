@@ -4,6 +4,9 @@ import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import abstractFactory.DiagnosisFactory;
+import abstractFactory.TreatmentFactory;
+
 public class Patient {
 	private static final Logger logger = Logger.getLogger(Patient.class.getName());
 
@@ -28,9 +31,12 @@ public class Patient {
 	@JsonProperty("address")
 	private String address;
 
+	private Diagnosis diagnosis;
+	private Treatment prescribedTreatment;
+
 	public Patient(int patientId, String firstName, String lastName, String dateOfBirth, String gender,
-			String contact_number,
-			String address) {
+			String contactNumber, String address) {
+		this.patientId = patientId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
@@ -98,33 +104,38 @@ public class Patient {
 		this.address = address;
 	}
 
+	public Diagnosis getDiagnosis() {
+		return diagnosis;
+	}
+
+	public void setDiagnosis(DiagnosisFactory diagnosisFactory) {
+		this.diagnosis = diagnosisFactory.createDiagnosis();
+	}
+
+	public Treatment getPrescribedTreatment() {
+		return prescribedTreatment;
+	}
+
+	public void setPrescribedTreatment(Treatment treatment) {
+		this.prescribedTreatment = treatment;
+	}
+
+	public void setPrescribedTreatment(TreatmentFactory treatmentFactory) {
+		this.prescribedTreatment = treatmentFactory.createTreatment();
+	}
+
+	public void setAge(int age) {
+		// Implementation for setting age
+	}
+
+	public void setMedicalHistory(String newMedicalHistory) {
+		// Implementation for setting medical history
+	}
+
 	@Override
 	public String toString() {
 		return "Patient [id=" + patientId + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth="
 				+ dateOfBirth + ", gender=" + gender + ", contactNumber=" + contactNumber + ", address=" + address
 				+ "]";
 	}
-
-
-	public void setDiagnosis(Diagnosis diagnosis) {
-
-	}
-
-	public Diagnosis getDiagnosis() {
-		return null;
-	}
-
-	public void setPrescribedTreatment(Treatment treatment) {
-	}
-
-	public Treatment getPrescribedTreatment() {
-		return null;
-	}
-
-	public void setAge(int age) {
-	}
-
-	public void setMedicalHistory(String newMedicalHistory) {
-	}
-
 }
